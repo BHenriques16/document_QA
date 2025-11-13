@@ -80,7 +80,7 @@ import torch
 # --- Variável Global para o ID do Modelo ---
 # Vamos começar com o GPT-2. É pequeno, rápido de descarregar e corre em CPU.
 # AVISO: A sua qualidade de resposta será MUITO FRACA! É apenas para testar o pipeline.
-MODELO_ID = "microsoft/Phi-3-mini-4k-instruct"
+MODELO_ID = "mistralai/Mistral-7B-Instruct-v0.1"
 # MODELO_ID = "google/flan-t5-base" # Uma opção melhor (e ainda pequena)
 # MODELO_ID = "mistralai/Mistral-7B-Instruct-v0.1" # Uma opção excelente (requer boa GPU)
 
@@ -88,33 +88,29 @@ MODELO_ID = "microsoft/Phi-3-mini-4k-instruct"
 @st.cache_resource
 def carregar_llm():
     """
-    Carrega o LLM (Modelo de Linguagem) do Hugging Face.
-    Esta versão usa o Phi-3-mini, um modelo de Chat CausalLM.
+    Carrega o LLM (Mistral-7B).
+    Agora configurado para usar a GPU (device_map="auto").
     """
     with st.spinner(f"A carregar o LLM ({MODELO_ID})... Isto vai demorar e requer VRAM."):
         
         tokenizer = AutoTokenizer.from_pretrained(MODELO_ID)
         
-        # --- MUDANÇA IMPORTANTE ---
-        # Voltamos ao 'AutoModelForCausalLM' como o gpt2,
-        # mas este é um modelo moderno.
+        # --- ESTA É A VERSÃO RÁPIDA (GPU) ---
         model = AutoModelForCausalLM.from_pretrained(
             MODELO_ID,
-            device_map="auto",             # Tenta usar a GPU (cuda) se disponível
-            torch_dtype="auto",            # Usa o melhor tipo de dados (ex: float16)
-            trust_remote_code=True,        # Obrigatório para o Phi-3
+            device_map="auto",             # <--- MUDANÇA (auto deteta a GPU)
+            torch_dtype=torch.float16,     # <--- MUDANÇA (usa a memória rápida da GPU)
         )
 
-        # --- MUDANÇA IMPORTANTE ---
-        # A "tarefa" (task) do pipeline volta a ser "text-generation"
         pipe = pipeline(
             "text-generation",
             model=model,
             tokenizer=tokenizer,
-            max_new_tokens=512,  # Limita a *nova* geração
-            temperature=0.6,     
+            max_new_tokens=512,
+            temperature=0.7,     
             top_p=0.95,
-            repetition_penalty=1.15
+            repetition_penalty=1.15,
+            return_full_text=False  
         )
         
         return HuggingFacePipeline(pipeline=pipe)
