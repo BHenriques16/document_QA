@@ -1,12 +1,11 @@
-#  Document QA with RAG Architecture (Retrieval-Augmented Generation)
+#  Financial report analyst with RAG Architecture (Retrieval-Augmented Generation)
 
-Natural Language Processing (NLP) University of Beira Interior (UBI) Academic Year: 2025/2026
 
 ##  About the Project
 
-This repository contains the implementation of a Question Answering (QA) system for unstructured documents, developed as the final project for the Natural Language Processing course.
+This repository contains the implementation of a expert system that solves the following probelm: 'How do you get an LLM student to answer factually, without hallucinating, based on a body of knowledge document they've never seen?' 
 
-The main objective was to create a robust application capable of overcoming the context limitations of traditional LLMs by utilizing a RAG (Retrieval-Augmented Generation) architecture. The system ingests long technical documents (e.g., financial reports, technical manuals, scientific articles), fragments them, and allows the user to interact with them using natural language, with guaranteed information traceability (source citation).
+This repository contains the implementation of a expert system wich main objective was to create a robust application capable of overcoming the context limitations of traditional LLMs by utilizing a RAG (Retrieval-Augmented Generation) architecture. The system ingests long technical documents (e.g., financial reports, technical manuals, scientific articles), fragments them, and allows the user to interact with them using natural language, with guaranteed information traceability (source citation).
 
 ###  Key Features
 
