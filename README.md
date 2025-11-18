@@ -1,106 +1,106 @@
-#  Document QA com Arquitetura RAG (Retrieval-Augmented Generation)
+# ** Document QA with RAG Architecture (Retrieval-Augmented Generation)**
 
-Processamento de Linguagem Natural (PLN) Universidade da Beira Interior (UBI) Ano Letivo: 2025/2026
+**Natural Language Processing (NLP)** **University of Beira Interior (UBI)** **Academic Year:** 2025/2026
 
-##  Sobre o Projeto
+## ** About the Project**
 
-Este repositório contém a implementação de um sistema de Question Answering (QA) sobre documentos não estruturados, desenvolvido como trabalho final para a unidade curricular de Processamento de Linguagem Natural.
+This repository contains the implementation of a **Question Answering (QA)** system for unstructured documents, developed as the final project for the Natural Language Processing course.
 
-O objetivo principal foi criar uma aplicação robusta capaz de ultrapassar as limitações de contexto dos LLMs tradicionais, utilizando uma arquitetura RAG (Retrieval-Augmented Generation). O sistema ingere documentos técnicos longos (ex: relatórios financeiros, manuais técnicos, artigos científicos), fragmenta-os e permite que o utilizador interaja com os mesmos através de linguagem natural, com garantia de rastreabilidade da informação (citação de fontes).
+The main objective was to create a robust application capable of overcoming the context limitations of traditional LLMs by utilizing a **RAG (Retrieval-Augmented Generation)** architecture. The system ingests long technical documents (e.g., financial reports, technical manuals, scientific articles), fragments them, and allows the user to interact with them using natural language, with guaranteed information traceability (source citation).
 
-###  Funcionalidades Principais
+### ** Key Features**
 
-* Ingestão de Múltiplos Documentos: Suporte para leitura e processamento em lote de ficheiros PDF.  
-* Vetorização Persistente: Criação de uma base de dados vetorial (Vector Store) local para evitar o reprocessamento de dados.  
-* LLM 100% Local: Utilização de modelos Open Source (Llama 3.2 ou Mistral) via Ollama, garantindo privacidade dos dados.  
-* Interface Interativa: Aplicação web desenvolvida em Streamlit com chat histórico e gestão de contexto.  
-* Prevenção de Alucinações: O sistema indica explicitamente o documento e o número da página de onde a resposta foi extraída.
+* **Multi-Document Ingestion:** Support for batch reading and processing of PDF files.  
+* **Persistent Vectorization:** Creation of a local Vector Store to avoid reprocessing data.  
+* **100% Local LLM:** Utilization of Open Source models (Llama 3.2 or Mistral) via Ollama, ensuring data privacy.  
+* **Interactive Interface:** Web application developed in Streamlit with chat history and context management.  
+* **Hallucination Prevention:** The system explicitly indicates the document and page number from which the answer was extracted.
 
-##  Stack Tecnológica
+## ** Tech Stack**
 
-O projeto foi desenvolvido em Python utilizando as seguintes bibliotecas e ferramentas:
+The project was developed in **Python** using the following libraries and tools:
 
-| Componente | Tecnologia | Descrição |
+| Component | Technology | Description |
 | :---- | :---- | :---- |
-| LLM Server | [Ollama](https://ollama.com/) | Execução local de modelos Llama/Mistral. |
-| Orquestração | [LangChain](https://www.langchain.com/) | Framework para ligar o LLM aos dados. |
-| Vector Store | [ChromaDB](https://www.trychroma.com/) | Base de dados para armazenamento de embeddings. |
-| Embeddings | mxbai-embed-large | Modelo de vetorização de texto de alto desempenho. |
-| Interface | [Streamlit](https://streamlit.io/) | Frontend para interação com o utilizador. |
-| PDF Parsing | pypdf | Extração de texto e metadados dos ficheiros. |
+| **LLM Server** | [Ollama](https://ollama.com/) | Local execution of Llama/Mistral models. |
+| **Orchestration** | [LangChain](https://www.langchain.com/) | Framework to connect the LLM to the data. |
+| **Vector Store** | [ChromaDB](https://www.trychroma.com/) | Database for storing embeddings. |
+| **Embeddings** | mxbai-embed-large | High-performance text vectorization model. |
+| **Interface** | [Streamlit](https://streamlit.io/) | Frontend for user interaction. |
+| **PDF Parsing** | pypdf | Extraction of text and metadata from files. |
 
-##  Instalação e Configuração
+## ** Installation and Setup**
 
-### 1\. Pré-requisitos
+### **1\. Prerequisites**
 
-Certifique-se de que tem instalado:
+Ensure you have installed:
 
-* Python 3.8 ou superior.  
-* [Ollama](https://ollama.com/) (para correr o modelo localmente).
+* Python 3.8 or higher.  
+* [Ollama](https://ollama.com/) (to run the model locally).
 
-### 2\. Configuração do Modelo (Ollama)
+### **2\. Model Configuration (Ollama)**
 
-No seu terminal, descarregue os modelos necessários:
+In your terminal, pull the necessary models:
 
-\# Modelo de Linguagem (Chat)  
+\# Language Model (Chat)  
 ollama pull llama3.2
 
-\# Modelo de Embeddings (Vetorização)  
+\# Embedding Model (Vectorization)  
 ollama pull mxbai-embed-large
 
-### 3\. Instalação de Dependências
+### **3\. Dependency Installation**
 
-Recomenda-se a criação de um ambiente virtual. Instale as bibliotecas Python necessárias:
+It is recommended to create a virtual environment. Install the necessary Python libraries:
 
 pip install langchain langchain-community langchain-ollama langchain-chroma streamlit pypdf
 
-##  Como Utilizar
+## ** How to Use**
 
-O fluxo de trabalho divide-se em duas fases: Ingestão de Dados e Interação.
+The workflow is divided into two phases: **Data Ingestion** and **Interaction**.
 
-### Passo 1: Preparação dos Dados (Ingestão)
+### **Step 1: Data Preparation (Ingestion)**
 
-1. Coloque os seus ficheiros PDF na pasta data/.  
-2. Execute o script de vetorização. Este script irá ler os documentos, dividir o texto em fragmentos (chunks) e guardar os embeddings no ChromaDB.
+1. Place your PDF files in the data/ folder.  
+2. Run the vectorization script. This script will read the documents, split the text into chunks, and save the embeddings in ChromaDB.
 
 python vector.py
 
-*Nota: Execute este passo apenas na primeira vez ou sempre que adicionar novos documentos à pasta data.*
+*Note: Run this step only for the first time or whenever you add new documents to the data folder.*
 
-### Passo 2: Executar a Aplicação
+### **Step 2: Run the Application**
 
-Inicie a interface web Streamlit:
+Start the Streamlit web interface:
 
 streamlit run app.py
 
-A aplicação ficará disponível no seu navegador em http://localhost:8501.
+The application will be available in your browser at http://localhost:8501.
 
-##  Estrutura do Repositório
+## ** Repository Structure**
 
 .  
-├── data/                     \# Diretório para colocar os ficheiros PDF de entrada  
-├── chroma\_db\_financas/       \# Base de dados vetorial (gerada automaticamente)  
-├── vector.py                 \# Script de pipeline ETL (Extract, Transform, Load)  
-├── app.py                    \# Aplicação principal (Frontend Streamlit \+ RAG Chain)  
-└── README.md                 \# Documentação do projeto
+├── data/                     \# Directory to place input PDF files  
+├── chroma\_db\_financas/       \# Vector database (automatically generated)  
+├── vector.py                 \# ETL Pipeline Script (Extract, Transform, Load)  
+├── app.py                    \# Main Application (Frontend Streamlit \+ RAG Chain)  
+└── README.md                 \# Project documentation
 
-##  Detalhes de Implementação
+## ** Implementation Details**
 
-### Estratégia de Chunking
+### **Chunking Strategy**
 
-Para lidar com documentos extensos, foi utilizado o RecursiveCharacterTextSplitter com:
+To handle extensive documents, the RecursiveCharacterTextSplitter was used with:
 
-* Chunk Size: 1500 caracteres (otimizado para capturar tabelas financeiras e parágrafos completos).  
-* Overlap: 300 caracteres (para manter o contexto semântico entre cortes).
+* **Chunk Size:** 1500 characters (optimized to capture financial tables and complete paragraphs).  
+* **Overlap:** 300 characters (to maintain semantic context between splits).
 
-### Recuperação (Retrieval)
+### **Retrieval**
 
-Utiliza-se o algoritmo MMR (Maximal Marginal Relevance) na recuperação de documentos para garantir diversidade nas fontes citadas e evitar que um único documento domine a janela de contexto do LLM.
+The **MMR (Maximal Marginal Relevance)** algorithm is used for document retrieval to ensure diversity in the cited sources and prevent a single document from dominating the LLM context window.
 
-##  Autor
+## ** Author**
 
-Nome do Aluno Número de Aluno: XXXXX
+**Student Name** Student Number: XXXXX
 
-Engenharia Informática / Ciência de Dados
+Computer Science / Data Science
 
-Universidade da Beira Interior
+University of Beira Interior
