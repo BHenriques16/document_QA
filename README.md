@@ -3,9 +3,7 @@
 
 ##  Project Overview
 
-This repository features the implementation of a Document Question Answering (DQA) system, developed as the final project for the Natural Language Processing course.
-
-The system is built upon a Retrieval-Augmented Generation (RAG) architecture to overcome the context limitations of Large Language Models (LLMs). The application acts as a "Financial Analyst" capable of extracting, synthesizing, and comparing critical data from complex corporate filings (e.g., 10-Q reports), specifically designed to investigate the "AI Bubble" hypothesis by comparing CapEx and Cloud Growth between major tech companies (Microsoft vs. Alphabet).
+This repository features the implementation of a Document Question Answering (QA) system, this system is built upon a Retrieval-Augmented Generation (RAG) architecture to overcome the context limitations of Large Language Models (LLMs). The application acts as a "Financial Analyst" capable of extracting, synthesizing, and comparing critical data from complex corporate filings (e.g., 10-Q reports), specifically designed to investigate the "AI Bubble" hypothesis by comparing CapEx and Cloud Growth between major tech companies (Microsoft vs. Alphabet).
 
 ###  NLP Context and Core Areas
 
